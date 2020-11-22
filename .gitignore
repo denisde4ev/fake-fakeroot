@@ -1,0 +1,7 @@
+*~
+fakefakeroot-*.tar.*
+
+src/
+srcdir/
+pkg/
+pkgdir/
