@@ -1,12 +1,13 @@
 #!/bin/sh
 set -eu
-# [ "x$EUID" = x0 ] # exit when not root
+#[ "x$EUID" = x0 ] # exit when not root
 
-while true; do
+if [ "$#" = 0 ]
+then set -- ${SHELL:-/bin/sh}; break
+else while true; do
 	case "$1" in
 		--) shift; break;;
-		[^-]*) break;;
-		-h|--help) 
+		-h|--help)
 			cat - >&2 <<EOF
 fake fakeroot, does not "create a fake root environment."
    usage: fakeroot [-l|--lib IGNORED] [-f|--faked IGNORED]
@@ -16,14 +17,14 @@ fake fakeroot, does not "create a fake root environment."
 EOF
 			exit;;
 		-v|--version)
-			printf %s 'fake fakeroot with commpatible arguments to: ' >&2
+			[ -t 1 ] && printf %s 'fake fakeroot with commpatible arguments to: ' >&2
 			echo 'fakeroot version 1.25.3'
 			exit 0
 		;;
 		-[lfisb]|--lib|--faked|--fd-base) shift; shift;; # IGNORED
 		-*) shift;;
-		'') set -- ${SHELL:-/bin/sh}; break;;
+		*) break;; # it must be [^-]*) "in POSIX is undefined"
 	esac
-done
+done; fi
 
-FAKED_MODE=unknown-is-root FAKEROOTKEY=$RANDOM$RANDOM exec -- "$@"
+FAKED_MODE=unknown-is-root FAKEROOTKEY=${RANDOM:-12345}${RANDOM:-67890} exec "$@"
