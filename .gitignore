@@ -1,5 +1,8 @@
 *~
 fakefakeroot-*.tar.*
+fake-fakeroot-*.tar.*
+fakefakeroot/
+fake-fakeroot/
 
 src/
 srcdir/

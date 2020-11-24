@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# todo asfk if is faking root if process is root
+
+
+while test "X$1" != "X--"; do
+	case "$1" in
+		--) shift; break;;
+		[^-]*) break;;
+		-h|--help) 
+			cat - >&2 <<EOF
+fake fakeroot, does not "create a fake root environment."
+   usage: fakeroot [-l|--lib IGNORED] [-f|--faked IGNORED]
+                   [-i IGNORED] [-s IGNORED] 
+           [-b|--fd-base IGNORED] [-h|--help] [-v|--version]
+                   [--] [command]
+EOF
+			exit;;
+		-v|--version) printf >&2 %s 'fake fakeroot commpatible with: '; echo 'fakeroot version 1.25.3'; exit 0;;
+		-[lsib]|--lib|--faked|--fd-base) shift; shift;;
+		-*) shift;;
+		'') set -- ${SHELL:-/bin/sh}; break;;
+	esac
+done
+
+FAKED_MODE=unknown-is-root FAKEROOTKEY=$RANDOM$RANDOM exec "$@"
