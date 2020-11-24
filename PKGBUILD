@@ -21,7 +21,7 @@ pkgver() {
 }
 
 check() {
-	"$srcdir/fake-fakeroot" sh -c '[ X"$FAKED_MODE" = Xunknown-is-root ] && [ -n "$FAKEROOTKEY" ] || exit 1'
+	"$srcdir/fake-fakeroot" -- sh -c '[ X"$FAKED_MODE" = Xunknown-is-root ] && [ -n "$FAKEROOTKEY" ] || exit 1'
 }
 
 package() {

@@ -2,7 +2,7 @@
 set -eu
 # [ "x$EUID" = x0 ] # exit when not root
 
-while test "X$1" != "X--"; do
+while true; do
 	case "$1" in
 		--) shift; break;;
 		[^-]*) break;;
