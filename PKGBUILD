@@ -21,12 +21,9 @@ pkgver() {
 }
 
 check() {
-	cd "$srcdir"
-
-	./fake-fakeroot sh -c '[ X"$FAKED_MODE" = Xunknown-is-root ] && [ -n "$FAKEROOTKEY" ] || exit 1'
+	"$srcdir/fake-fakeroot" sh -c '[ X"$FAKED_MODE" = Xunknown-is-root ] && [ -n "$FAKEROOTKEY" ] || exit 1'
 }
 
 package() {
-	cd "$srcdir"
-	install -Dm755 -t "$pkgdir/usr/bin/" fake-fakeroot
+	install -Dm755 -t "$pkgdir/usr/bin/" "$srcdir/fake-fakeroot"
 }
