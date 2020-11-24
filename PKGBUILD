@@ -25,5 +25,5 @@ check() {
 }
 
 package() {
-	install -Dm755 -t "$pkgdir/usr/bin/" "$srcdir/fake-fakeroot"
+	install -Dm755 "$srcdir/fake-fakeroot" "$pkgdir/usr/bin/fakeroot"
 }

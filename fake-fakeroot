@@ -1,7 +1,6 @@
 #!/bin/sh
-
-# todo asfk if is faking root if process is root
-
+set -eu
+# [ "x$EUID" = x0 ] # exit when not root
 
 while test "X$1" != "X--"; do
 	case "$1" in
@@ -16,11 +15,15 @@ fake fakeroot, does not "create a fake root environment."
                    [--] [command]
 EOF
 			exit;;
-		-v|--version) printf >&2 %s 'fake fakeroot commpatible with: '; echo 'fakeroot version 1.25.3'; exit 0;;
-		-[lsib]|--lib|--faked|--fd-base) shift; shift;;
+		-v|--version)
+			printf %s 'fake fakeroot with commpatible arguments to: ' >&2
+			echo 'fakeroot version 1.25.3'
+			exit 0
+		;;
+		-[lfisb]|--lib|--faked|--fd-base) shift; shift;; # IGNORED
 		-*) shift;;
 		'') set -- ${SHELL:-/bin/sh}; break;;
 	esac
 done
 
-FAKED_MODE=unknown-is-root FAKEROOTKEY=$RANDOM$RANDOM exec "$@"
+FAKED_MODE=unknown-is-root FAKEROOTKEY=$RANDOM$RANDOM exec -- "$@"
