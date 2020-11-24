@@ -16,8 +16,12 @@ md5sums=('SKIP')
 
 pkgver() {
 	cd "$startdir"
-	[ -d .git ]
+	[ "x$(git rev-parse --show-toplevel)" = "x$PWD" ]
 	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+	sed --in-place -e "s/^version=UNKNOWN$/version=$(pkgver)/" "$srcdir/fake-fakeroot" || true
 }
 
 check() {

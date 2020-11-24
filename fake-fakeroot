@@ -17,8 +17,8 @@ fake fakeroot, does not "create a fake root environment."
 EOF
 			exit;;
 		-v|--version)
-			[ -t 1 ] && printf %s 'fake fakeroot with commpatible arguments to: ' >&2
-			echo 'fakeroot version 1.25.3'
+version=UNKNOWN
+			echo "fake-fakeroot version $version"
 			exit 0
 		;;
 		-[lfisb]|--lib|--faked|--fd-base) shift; shift;; # IGNORED
