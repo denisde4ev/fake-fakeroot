@@ -4,6 +4,8 @@ fake-fakeroot-*.tar.*
 fakefakeroot/
 fake-fakeroot/
 
+fakeroot
+
 src/
 srcdir/
 pkg/
