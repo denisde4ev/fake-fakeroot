@@ -16,7 +16,7 @@ md5sums=('SKIP')
 
 pkgver() {
 	cd "$startdir"
-	[ "x$(git rev-parse --show-toplevel)" = "x$PWD" ]
+
 	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
