@@ -7,11 +7,12 @@ then set -- ${SHELL:-/bin/sh}; break
 else while true; do
 	case "$1" in
 		--) shift; break;;
+		[!-]*) break;;
 		-h|--help)
 			cat - >&2 <<EOF
 fake fakeroot, does not "create a fake root environment."
    usage: fakeroot [-l|--lib IGNORED] [-f|--faked IGNORED]
-                   [-i IGNORED] [-s IGNORED] 
+                   [-i IGNORED] [-s IGNORED]
            [-b|--fd-base IGNORED] [-h|--help] [-v|--version]
                    [--] [command]
 EOF
@@ -21,10 +22,11 @@ version=UNKNOWN
 			echo "fake-fakeroot version $version"
 			exit 0
 		;;
-		-[lfisb]|--lib|--faked|--fd-base) shift; shift;; # IGNORED
-		-*) shift;;
-		*) break;; # it must be [^-]*) "in POSIX is undefined"
+		-[lfisb]|--lib|--faked|--fd-base) shift;; # IGNORED
+		-*) ;;
+		*) break;;
 	esac
+	shift
 done; fi
 
-FAKED_MODE=unknown-is-root FAKEROOTKEY=${RANDOM:-12345}${RANDOM:-67890} exec "$@"
+FAKED_MODE=unknown-is-root FAKEROOTKEY=${RANDOM:-12345}${RANDOM:-67890} "$@"
