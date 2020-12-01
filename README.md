@@ -11,7 +11,7 @@ git clone https://github.com/deni2020/fake-fakeroot.git fake-fakeroot && cd fake
 ```
 ln -sr fake-fakeroot fakeroot  &&  PATH=$PWD:$PATH makepkg -i
 ```
-* else use just `makepkg`
+* else use just `makepkg -i`
 
 ## For just executable use:
 ```
