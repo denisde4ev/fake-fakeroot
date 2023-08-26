@@ -1,3 +1,12 @@
+# NOTE:!
+
+this repo was created because of termux bug with fakeroot in Arch proot, nowadays seems to be fixed
+<br>
+<br>
+<br>
+<br>
+<br>
+
 # fake-fakeroot
 fake the fakeroot in root
 
